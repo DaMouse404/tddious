@@ -1,0 +1,6 @@
+First_pokemon,Second_pokemon,Winner,first_type1,second_type1,first_type2,second_type2,first_speed,second_speed,first_atk_power,second_atk_power
+266,298,298,Rock,Grass,Ground,Dark,41,60,150,190
+702,701,701,Grass,Rock,Fighting,Fighting,108,108,288,309
+191,668,668,Fairy,Psychic,Flying,,40,40,160,240
+237,683,683,Fire,Dragon,,,20,48,130,228
+151,231,151,Rock,Bug,Water,Rock,55,5,230,25
