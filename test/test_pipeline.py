@@ -12,8 +12,7 @@ def test_pipeline():
 
 def test_extract_features():
     combats = pandas.read_csv('test/fixtures/combats_head.csv')
-    pokemon = pandas.read_csv('test/fixtures/pokemon.csv')
+    pokemon = pandas.read_csv('test/fixtures/pokemon.csv', index_col=0)
     expected_features = pandas.read_csv('test/fixtures/features_head.csv')
-    print(list(expected_features))
-    print(list(extract_features(combats,pokemon)))
+
     assert_frame_equal(extract_features(combats, pokemon), expected_features)

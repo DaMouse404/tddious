@@ -10,4 +10,4 @@ notebook:
 	.venv/bin/jupyter notebook notebook/predict-result-for-pokemon-s-battle.ipynb
 
 test: .venv
-	PYTHONPATH=$(PWD) .venv/bin/pytest --durations=0 $(FILTER)
+	PYTHONPATH=$(PWD) .venv/bin/pytest -s --durations=0 $(FILTER)

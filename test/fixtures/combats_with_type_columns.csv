@@ -1,6 +1,6 @@
-First_pokemon,Second_pokemon,Winner,first_type1,second_type1,first_type2,second_type2,first_speed,second_speed,first_atk_power,second_atk_power,has_secondary_type_first,has_secondary_type_second,has_type_advantage_first,has_type_advantage_second
-266,298,298,Rock,Grass,Ground,Dark,41,60,150,190,0,0,0,1
-702,701,701,Grass,Rock,Fighting,Fighting,108,108,288,309,0,0,1,0
-191,668,668,Fairy,Psychic,Flying,,40,40,160,240,0,1,0,0
-237,683,683,Fire,Dragon,,,20,48,130,228,1,1,0,0
-151,231,151,Rock,Bug,Water,Rock,55,5,230,25,0,0,1,0
+First_pokemon,Second_pokemon,Winner,has_type_advantage_first,has_type_advantage_second,has_secondary_type_first,has_secondary_type_second
+266,298,298,0,1,0,0
+702,701,701,1,0,0,0
+191,668,668,0,0,0,1
+237,683,683,0,0,1,1
+151,231,151,1,0,0,0

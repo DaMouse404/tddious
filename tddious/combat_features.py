@@ -25,13 +25,7 @@ boolean_map = {
   False: 0, True: 1
 }
 
-def add_columns(combats, pokemon):
-  combats['first_type1'] = combats['First_pokemon'].replace(pokemon['Type 1'])
-  combats['second_type1'] = combats['Second_pokemon'].replace(pokemon['Type 1'])
-  combats['first_type2'] = combats['First_pokemon'].replace(pokemon['Type 2'])
-  combats['second_type2'] = combats['Second_pokemon'].replace(pokemon['Type 2'])
-  combats['first_speed'] = combats['First_pokemon'].replace(pokemon['Speed'])
-  combats['second_speed'] = combats['Second_pokemon'].replace(pokemon['Speed'])
+def add_attack_columns(combats, pokemon):
   combats['first_atk_power'] = combats['First_pokemon'].replace(pokemon['Attack'])\
       + combats['First_pokemon'].replace(pokemon['Sp. Atk'])\
       + combats['First_pokemon'].replace(pokemon['Speed'])
@@ -46,11 +40,18 @@ def has_type_advantage(type1, type2):
 def has_secondary_type(type):
   return 1 if pandas.isnull(type) else 0
 
-def add_type_columns(combats):
-  combats['has_secondary_type_first'] = combats.apply(lambda x: has_secondary_type(x['first_type2']), axis=1)
-  combats['has_secondary_type_second'] = combats.apply(lambda x: has_secondary_type(x['second_type2']), axis=1)
-  combats['has_type_advantage_first'] = combats.apply(lambda x: has_type_advantage(x['first_type1'], x['second_type1']), axis=1)
-  combats['has_type_advantage_second'] = combats.apply(lambda x: has_type_advantage(x['second_type1'], x['first_type1']), axis=1)
+def add_type_columns(combats, pokemon):
+  type_comparison = pandas.DataFrame({
+    'first_type1': combats['First_pokemon'].replace(pokemon['Type 1']),
+    'second_type1': combats['Second_pokemon'].replace(pokemon['Type 1'])
+  })
+  first_type2 = combats['First_pokemon'].replace(pokemon['Type 2'])
+  second_type2 = combats['Second_pokemon'].replace(pokemon['Type 2'])
+
+  combats['has_type_advantage_first'] = type_comparison.apply(lambda x: has_type_advantage(x['first_type1'], x['second_type1']), axis=1)
+  combats['has_type_advantage_second'] = type_comparison.apply(lambda x: has_type_advantage(x['second_type1'], x['first_type1']), axis=1)
+  combats['has_secondary_type_first'] = first_type2.map(has_secondary_type)
+  combats['has_secondary_type_second'] = second_type2.map(has_secondary_type)
   return combats
 
 def add_win_columns(combats):
@@ -63,12 +64,12 @@ def add_win_columns(combats):
   )
   combats['win_rate_first'] = combats['First_pokemon'].map(win_rates)
   combats['win_rate_second'] = combats['Second_pokemon'].map(win_rates)
-  combats['win_rate_biggest'] = combats['win_rate_first']>combats['win_rate_second']
-  combats['win_rate_biggest'] = combats['win_rate_biggest'].map(boolean_map)
   return combats
 
-def add_speed_column(combats):
-  combats['first_more_fast'] = (combats['first_speed']>combats['second_speed']).map(boolean_map)
+def add_speed_column(combats, pokemon):
+  first_speed = combats['First_pokemon'].replace(pokemon['Speed'])
+  second_speed = combats['Second_pokemon'].replace(pokemon['Speed'])
+  combats['first_more_fast'] = (first_speed > second_speed).map(boolean_map)
   return combats
 
 def stat_differences(combats, pokemon):
