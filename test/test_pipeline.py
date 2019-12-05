@@ -4,7 +4,7 @@ from pandas.testing import assert_frame_equal
 from tddious import extract_features
 
 def test_pipeline():
-    pokemon = pandas.read_csv('test/fixtures/pokemon.csv')
+    pokemon = pandas.read_csv('test/fixtures/pokemon.csv', index_col=0)
     combats = pandas.read_csv('test/fixtures/combats.csv')
 
     features = extract_features(combats, pokemon)

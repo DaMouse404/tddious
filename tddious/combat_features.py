@@ -61,7 +61,7 @@ def add_win_columns(combats):
   win_rates = (
       combats.groupby('First_pokemon')['Winner'].sum()\
       +combats.groupby('Second_pokemon')['Winner'].sum()
-  )
+  ).replace(numpy.nan, 0)
   combats['win_rate_first'] = combats['First_pokemon'].map(win_rates)
   combats['win_rate_second'] = combats['Second_pokemon'].map(win_rates)
   return combats
