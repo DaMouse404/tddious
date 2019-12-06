@@ -1,4 +1,5 @@
 import pandas
+import numpy
 from sklearn.preprocessing import StandardScaler
 from sklearn.ensemble import RandomForestClassifier
 
@@ -27,8 +28,5 @@ def extract_features(combats, pokemon):
 
 
 def train_model(training_features, training_values):
-    class JuliaModel():
-        def predict(self, values):
-            return pandas.read_csv('test/fixtures/testing_values.csv', header=None)
-
-    return JuliaModel()
+    classifier = RandomForestClassifier(n_estimators=100, n_jobs=-1, random_state=100)
+    return classifier.fit(training_features, numpy.ravel(training_values))
